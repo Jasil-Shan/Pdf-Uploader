@@ -1,5 +1,5 @@
-import userModel from "../model/userModel"
-import { createToken } from "../utils/secretToken"
+import userModel from "../model/userModel.js"
+import { createToken } from "../utils/secretToken.js"
 import bcrypt from 'bcrypt'
 
 
@@ -7,7 +7,7 @@ import bcrypt from 'bcrypt'
 export async function signup(req, res) {
     try {
         const { name, email, password } = req.body
-        const existUser = await userModel.findOne(email)
+        const existUser = await userModel.findOne({email})
         if (existUser) return res.json({ status: false, message: 'OOps!...User already exists' })
         const hashPassword = bcrypt.hashSync(password, 12)
 
@@ -29,7 +29,7 @@ export async function login(req, res) {
     try {
         const { email, password } = req.body
 
-        const user = await userModel.findOne(email)
+        const user = await userModel.findOne({email})
         if (!user) return res.json({ status: false, message: "No user found" })
 
         const auth = bcrypt.compareSync(password, user.password)
