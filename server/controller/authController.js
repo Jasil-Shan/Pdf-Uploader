@@ -2,6 +2,8 @@ import userModel from "../model/userModel"
 import { createToken } from "../utils/secretToken"
 import bcrypt from 'bcrypt'
 
+
+
 export async function signup(req, res) {
     try {
         const { name, email, password } = req.body
@@ -11,16 +13,17 @@ export async function signup(req, res) {
 
         const user = userModel.create({ email, name, password: hashPassword })
         const token = createToken(user._id)
+        
         res.cookie("token", token, {
             withCredentials: true,
             httpOnly: false
         })
-
         res.status(201).json({ status: true, message: "User Created Successfully" })
     } catch (error) {
         console.error(error)
     }
 }
+
 
 export async function login(req, res) {
     try {

@@ -1,9 +1,14 @@
 import mongoose from "mongoose";
 
-export default function dbConnect(){
-    mongoose.connect("mongodb://127.0.0.1/Pdf-Uploader").then(result=>{
-        console.log("Database connected")
-    }).catch((err)=>{
-        console.log("data base error \n"+err)
-    })
-}
+export async function dbConnect() {
+    try {
+        mongoose.set('strictQuery', false);
+        await mongoose.connect(process.env.DB_CONFIG);
+        console.log('Database connected');
+    } catch (err) {
+        console.log(`Database error:\n${err}`);
+    }
+};
+
+
+
