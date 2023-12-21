@@ -67,6 +67,8 @@ const Signup = () => {
                                                     autoFocus
                                                     variant='standard'
                                                     onChange={formik.handleChange}
+                                                    error={formik.touched.fName && Boolean(formik.errors.fName)}
+                                                    helperText={formik.touched.fName && formik.errors.fName}
                                                 />
                                             </Grid>
                                             <Grid item xs={12} sm={6}>
@@ -79,7 +81,8 @@ const Signup = () => {
                                                     autoComplete="family-name"
                                                     variant='standard'
                                                     onChange={formik.handleChange}
-
+                                                    error={formik.touched.lName && Boolean(formik.errors.lName)}
+                                                    helperText={formik.touched.lName && formik.errors.lName}
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
@@ -92,7 +95,8 @@ const Signup = () => {
                                                     autoComplete="email"
                                                     variant='standard'
                                                     onChange={formik.handleChange}
-
+                                                    error={formik.touched.email && Boolean(formik.errors.email)}
+                                                    helperText={formik.touched.email && formik.errors.email}
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
