@@ -5,24 +5,31 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Avatar, Box, Container } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { validationSchema } from '../../utils/validation';
+import axios from 'axios'
 
 
 const Signup = () => {
+    const navigate = useNavigate()
 
     const formik = useFormik({
         initialValues: {
-            fName:'',
-            lName:'',
-            email:'',
-            password:'',
-            cPassword:''
+            fName: '',
+            lName: '',
+            email: '',
+            password: '',
+            cPassword: ''
         },
         validationSchema: validationSchema,
-        onSubmit: (values) => {
-            console.log(values);
+        onSubmit: async (values) => {
+            try {
+                const {data} = await axios.post('/signup', { ...values })
+                data.status ? navigate('/login') : console.log('error');
+            } catch (error) {
+                console.error('Signup Failed', error.message)
+            }
         },
     });
 
@@ -140,7 +147,7 @@ const Signup = () => {
                                         </Button>
                                         <Grid container justifyContent="flex-end">
                                             <Grid item>
-                                                <Link variant="body2">
+                                                <Link to={'/login'} variant="body2">
                                                     Already have an account? Sign in
                                                 </Link>
                                             </Grid>
