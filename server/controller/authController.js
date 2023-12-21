@@ -6,21 +6,23 @@ import bcrypt from 'bcrypt'
 
 export async function signup(req, res) {
     try {
-        const { name, email, password } = req.body
-        const existUser = await userModel.findOne({email})
+        const { lName, fName, email, password } = req.body
+        const existUser = await userModel.findOne({ email })
+
         if (existUser) return res.json({ status: false, message: 'OOps!...User already exists' })
         const hashPassword = bcrypt.hashSync(password, 12)
 
-        const user = userModel.create({ email, name, password: hashPassword })
+        const user = await userModel.create({ email, lName, fName, password: hashPassword })
         const token = createToken(user._id)
-        
+
         res.cookie("token", token, {
             withCredentials: true,
-            httpOnly: false
+            httpOnly: true
         })
-        res.status(201).json({ status: true, message: "User Created Successfully" })
+       return res.status(201).json({ status: true, message: "User Created Successfully",user })
     } catch (error) {
         console.error(error)
+        return res.status(500).json({ status: false, message: "Internal Server Error" });
     }
 }
 
@@ -29,7 +31,7 @@ export async function login(req, res) {
     try {
         const { email, password } = req.body
 
-        const user = await userModel.findOne({email})
+        const user = await userModel.findOne({ email })
         if (!user) return res.json({ status: false, message: "No user found" })
 
         const auth = bcrypt.compareSync(password, user.password)
@@ -38,10 +40,11 @@ export async function login(req, res) {
         const token = createToken(user._id)
         res.cookie("token", token, {
             withCredentials: true,
-            httpOnly: false
+            httpOnly: true
         })
-        res.status(200).json({ status: true, message: "Login Succes" })
+        return res.status(200).json({ status: true, message: "Login Succes" })
     } catch (error) {
         console.error(error)
+        return res.status(500).json({ status: false, message: "Internal Server Error" });
     }
 }
