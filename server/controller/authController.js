@@ -1,8 +1,7 @@
 import userModel from "../model/userModel.js"
 import { createToken } from "../utils/secretToken.js"
 import bcrypt from 'bcrypt'
-
-
+import jwt from 'jsonwebtoken'
 
 export async function signup(req, res) {
     try {
@@ -19,7 +18,7 @@ export async function signup(req, res) {
             withCredentials: true,
             httpOnly: true
         })
-       return res.status(201).json({ status: true, message: "User Created Successfully",user })
+        return res.status(201).json({ status: true, message: "User Created Successfully", user })
     } catch (error) {
         console.error(error)
         return res.status(500).json({ status: false, message: "Internal Server Error" });
@@ -46,5 +45,25 @@ export async function login(req, res) {
     } catch (error) {
         console.error(error)
         return res.status(500).json({ status: false, message: "Internal Server Error" });
+    }
+}
+
+
+export async function auth(req, res) {
+    try {
+        const token = req.cookies.token
+        if (!token) {
+            return res.status(401).json({ isAuthenticated: false, user: null });
+        }
+        const decoded = jwt.verify(token, process.env.TOKEN_KEY)
+        console.log(decoded);
+
+        const user = await userModel.findById(decoded.id)
+        console.log(user);
+
+        return res.status(200).json({ isAuthenticated: true, user })
+    } catch (error) {
+        console.error('Token verification failed:', error.message);
+        return res.status(401).json({ isAuthenticated: false, user: null });
     }
 }
