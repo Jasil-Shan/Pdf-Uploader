@@ -9,6 +9,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { validationSchema } from '../../utils/validation';
 import axios from 'axios'
+import { toast } from 'react-toastify';
 
 
 const Signup = () => {
@@ -25,8 +26,17 @@ const Signup = () => {
         validationSchema: validationSchema,
         onSubmit: async (values) => {
             try {
-                const {data} = await axios.post('/signup', { ...values })
-                data.status ? navigate('/login') : console.log('error');
+                const { data } = await axios.post('/signup', { ...values })
+                if (data.status) {
+                    navigate('/login')
+                    toast.success(data.message, {
+                        position: "top-center"
+                    })
+                } else {
+                    toast.error(data.message, {
+                        position: "top-center"
+                    })
+                }
             } catch (error) {
                 console.error('Signup Failed', error.message)
             }
