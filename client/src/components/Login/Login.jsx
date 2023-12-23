@@ -9,10 +9,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import axios from 'axios';
 import { loginValidationSchema } from '../../utils/validation';
+import { useDispatch } from 'react-redux';
+import { loginSuccess } from '../../../redux/slices/authSlice';
+import { toast } from 'react-toastify';
 
 
 const Login = () => {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     const formik = useFormik({
         initialValues: {
@@ -23,7 +27,10 @@ const Login = () => {
         onSubmit: async (values) => {
             try {
                 const { data } = await axios.post('/login', { ...values })
-                data.status ? navigate('/') : console.log(data);
+                dispatch(loginSuccess(data.user))
+                data.status ? navigate('/') : toast.error(data.message, {
+                    position: "top-center"
+                })
             } catch (error) {
                 console.error('Signup Failed', error.message)
             }
