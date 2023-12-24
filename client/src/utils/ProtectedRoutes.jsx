@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, Outlet, useNavigate } from "react-router-dom";
 import { loginSuccess } from "../../redux/slices/authSlice";
-import { auth } from "../../services/auth";
+import { auth } from "../../services/authService";
 
 const ProtectedRoutes = () => {
   const dispatch = useDispatch();
