@@ -1,10 +1,10 @@
 import userModel from "../model/userModel.js";
-
-
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
 export async function uploadPdf(req, res) {
     try {
-        console.log(req.file, 'yfyfy');
         const pdf = req.file
         const _id = req.userId
 
@@ -25,19 +25,25 @@ export async function uploadPdf(req, res) {
 }
 
 
+
 export async function getPdf(req, res) {
     try {
-        const _id = req.userId
-        const pdf = await userModel.findById(_id, { pdfDetails: 1 });
-        if (!pdf) {
+        const _id = req.userId;
+        const { pdfDetails } = await userModel.findById(_id, { pdfDetails: 1 });
+
+        if (!pdfDetails) {
             return res.status(404).json({ error: "User not found" });
         }
-        const filePath = path.join(__dirname, 'path/to/pdf/storage', pdfDetails.fileName);
-        res.sendFile(filePath);
-        return res.json({ success: true, pdf })
 
+
+        const currentModulePath = fileURLToPath(import.meta.url);
+        const currentModuleDir = dirname(currentModulePath);
+        const filePath = path.join(currentModuleDir, '..', pdfDetails.path);
+    
+        res.sendFile(filePath);
     } catch (error) {
-        res.json({ status: false, message: 'Network error' })
-        console.error(error)
+        res.json({ status: false, message: 'Network error' });
+        console.error(error);
     }
 }
+

@@ -13,6 +13,7 @@ import { toast } from 'react-toastify';
 
 
 const Signup = () => {
+
     const navigate = useNavigate()
 
     const formik = useFormik({

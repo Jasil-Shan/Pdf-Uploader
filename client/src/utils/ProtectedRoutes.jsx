@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Navigate, Outlet, useNavigate } from "react-router-dom";
 import { loginSuccess } from "../../redux/slices/authSlice";
 import { auth } from "../../services/authService";
+import Loading from "../components/Loading/Loading";
 
 const ProtectedRoutes = () => {
   const dispatch = useDispatch();
@@ -29,7 +30,7 @@ const ProtectedRoutes = () => {
   }, [dispatch, isAuthenticated, navigate]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loading />
   }
 
   return isAuthenticated ? <Outlet /> : <Navigate to={'/login'} />;
