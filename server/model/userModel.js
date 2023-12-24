@@ -22,6 +22,10 @@ const userSchema = new mongoose.Schema({
       type: Date,
       default: new Date(),
     },
+    pdfDetails:{
+      fileName:String,
+      path:String
+    }
   });
 
 const userModel = mongoose.model("user", userSchema)

@@ -56,10 +56,8 @@ export async function auth(req, res) {
             return res.status(401).json({ isAuthenticated: false, user: null });
         }
         const decoded = jwt.verify(token, process.env.TOKEN_KEY)
-        console.log(decoded);
 
         const user = await userModel.findById(decoded.id)
-        console.log(user);
 
         return res.status(200).json({ isAuthenticated: true, user })
     } catch (error) {
