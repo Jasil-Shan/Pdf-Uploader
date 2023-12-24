@@ -12,13 +12,18 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { logout } from '../../../redux/slices/authSlice';
 
-const pages = ['Products'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const pages = ['Mypdf'];
+const settings = ['Logout'];
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -31,32 +36,36 @@ function Navbar() {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
+  const handleSettings = () => {
+
+    dispatch(logout())
+    navigate('/login',{replace:true}) 
+    setAnchorElUser(null)
   };
 
   return (
-    <AppBar position="static" color='transparent' sx={{margin:0}}>
+    <AppBar position="static" color='transparent' sx={{ margin: 0 }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.1 rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            PDF ZONE
-          </Typography>
+          <Link to={'/'} style={{ textDecoration: 'none',color:'black' }} >
+            <Typography
+              variant="h6"
+              noWrap
+              component="a"
+              sx={{
+                mr: 2,
+                display: { xs: 'none', md: 'flex' },
+                fontFamily: 'monospace',
+                fontWeight: 700,
+                letterSpacing: '.1 rem',
+                color: 'inherit',
+                textDecoration: 'none',
+              }}
+            >
+              PDF ZONE
+            </Typography>
+          </Link>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -145,10 +154,10 @@ function Navbar() {
                 horizontal: 'right',
               }}
               open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
+              onClose={handleSettings}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem key={setting} onClick={handleSettings}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
@@ -157,7 +166,7 @@ function Navbar() {
         </Toolbar>
       </Container>
     </AppBar>
-    
+
   );
 }
 export default Navbar;
