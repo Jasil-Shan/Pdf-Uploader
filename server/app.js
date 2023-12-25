@@ -4,7 +4,6 @@ import 'dotenv/config.js'
 import cookieParser from "cookie-parser"
 import { dbConnect } from "./config/dbConfig.js"
 import userRouter from './routes/userRouter.js'
-import ExpressMongoSanitize from "express-mongo-sanitize"
 
 const app = express()
 
@@ -20,7 +19,6 @@ app.use(
         credentials: true,
     }))
 
-app.use(ExpressMongoSanitize());
 app.use(express.json())
 app.use(cookieParser())
 app.use(express.urlencoded({ extended: true }))
