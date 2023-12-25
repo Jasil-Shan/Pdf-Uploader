@@ -51,8 +51,5 @@ Thank For Exploring my project
 =======
 # Pdf-Uploader
 
-# Overview
-
-PDF Uploader is a web application that allows users to upload PDF files and perform various operations on them, such as viewing, selecting specific pages, and downloading a new PDF with the selected pages.
 
 >>>>>>> 48dfa07d8d5ce58bc422239a4c4596ff38d789ad
