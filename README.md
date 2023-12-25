@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # PDF Uploader Project
 
 ## Overview
@@ -49,7 +48,3 @@ LIVE LINK : https://pdf-zone.netlify.app/
 
 Thank For Exploring my project
 =======
-# Pdf-Uploader
-
-
->>>>>>> 48dfa07d8d5ce58bc422239a4c4596ff38d789ad
