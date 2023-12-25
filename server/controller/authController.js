@@ -16,7 +16,7 @@ export async function signup(req, res) {
 
         res.cookie("token", token, {
             withCredentials: true,
-            httpOnly: true
+            httpOnly: false
         })
         return res.status(201).json({ status: true, message: "User Created Successfully", user })
     } catch (error) {
@@ -39,7 +39,8 @@ export async function login(req, res) {
         const token = createToken(user._id)
         res.cookie("token", token, {
             withCredentials: true,
-            httpOnly: false
+            httpOnly: false,
+            sameSite: "None",
         })
         return res.status(200).json({ status: true, message: "Login Succes" })
     } catch (error) {
