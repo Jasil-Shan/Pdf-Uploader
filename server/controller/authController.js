@@ -12,12 +12,7 @@ export async function signup(req, res) {
         const hashPassword = bcrypt.hashSync(password, 12)
 
         const user = await userModel.create({ email, lName, fName, password: hashPassword })
-        const token = createToken(user._id)
-
-        res.cookie("token", token, {
-            withCredentials: true,
-            httpOnly: false
-        })
+       
         return res.status(201).json({ status: true, message: "User Created Successfully", user })
     } catch (error) {
         console.error(error)
@@ -37,10 +32,13 @@ export async function login(req, res) {
         if (!auth) return res.json({ status: false, message: " Invalid Email or Password " })
 
         const token = createToken(user._id)
+        if(!token) return res.status(500).json({ status: false, message: "Internal Server Error" });
+
         res.cookie("token", token, {
             withCredentials: true,
             httpOnly: false,
             sameSite: "None",
+            secure:true
         })
         return res.status(200).json({ status: true, message: "Login Succes" })
     } catch (error) {
