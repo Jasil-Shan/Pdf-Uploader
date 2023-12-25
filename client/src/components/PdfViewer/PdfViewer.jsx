@@ -64,7 +64,7 @@ const PdfViewer = () => {
       }
     }
     newPdf.save('new-pdf.pdf');
-    toast.error('Downloaded Successfully', {
+    toast.success('Downloaded Successfully', {
       position: "top-center"
   })
     navigate('/')
