@@ -12,7 +12,10 @@ dbConnect()
 
 app.use(
     cors({
-        origin: 'http://localhost:5000',
+        origin: [
+            'http://localhost:5000',
+            'https://pdf-zone.netlify.app',
+        ],
         credentials: true,
     }))
 
@@ -21,9 +24,9 @@ app.use(cookieParser())
 app.use(express.urlencoded({ extended: true }))
 
 
-app.use('/',userRouter)
+app.use('/', userRouter)
 
-const {PORT} = process.env
+const { PORT } = process.env
 app.listen(PORT, () => {
     console.log(`Server listening on: ${PORT}`);
 })

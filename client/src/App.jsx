@@ -5,7 +5,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import UserRouter from './routes/UserRouter';
 
 function App() {
-  axios.defaults.baseURL = "http://localhost:4000"
+  // axios.defaults.baseURL = "http://localhost:4000"
+  axios.defaults.baseURL = "https://pdfzone.comicworld.store"
   axios.defaults.withCredentials = true;
   return (
     <>
