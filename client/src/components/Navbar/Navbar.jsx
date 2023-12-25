@@ -36,7 +36,9 @@ function Navbar() {
     setAnchorElNav(null);
   };
 
-  const handleLogout = async () => {
+  const handleLogout = async (e) => {
+    
+    e.preventDefault()
 
     const result = await UserLogout()
 
