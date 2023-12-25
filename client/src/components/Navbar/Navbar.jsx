@@ -15,9 +15,9 @@ import AdbIcon from '@mui/icons-material/Adb';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logout } from '../../../redux/slices/authSlice';
+import { UserLogout } from '../../../services/authService';
 
-const pages = ['Mypdf'];
-const settings = ['Logout'];
+const pages = ['Mypdfs'];
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -36,10 +36,12 @@ function Navbar() {
     setAnchorElNav(null);
   };
 
-  const handleSettings = () => {
+  const handleLogout = async () => {
 
+    const result = await UserLogout()
+    
     dispatch(logout())
-    navigate('/login',{replace:true}) 
+    navigate('/login', { replace: true })
     setAnchorElUser(null)
   };
 
@@ -48,7 +50,7 @@ function Navbar() {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-          <Link to={'/'} style={{ textDecoration: 'none',color:'black' }} >
+          <Link to={'/'} style={{ textDecoration: 'none', color: 'black' }} >
             <Typography
               variant="h6"
               noWrap
@@ -156,11 +158,9 @@ function Navbar() {
               open={Boolean(anchorElUser)}
               onClose={handleSettings}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleSettings}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
+              <MenuItem onClick={handleLogout}>
+                <Typography textAlign="center">Logout</Typography>
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>

@@ -7,6 +7,7 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import { uploadPdf } from '../../../services/pdfService'
 
 
 const VisuallyHiddenInput = styled('input')({
@@ -32,9 +33,9 @@ const Home = () => {
         if (selectedPdf.type === 'application/pdf') {
             const formData = new FormData()
             formData.append('file', selectedPdf)
-            const result = await axios.post('/uploadPdf', formData, {
-                headers: { 'Content-Type': 'multipart/form-data' },
-            })
+
+            const result = await uploadPdf(formData)
+            
             console.log(result)
             navigate('/pdfView')
         } else {

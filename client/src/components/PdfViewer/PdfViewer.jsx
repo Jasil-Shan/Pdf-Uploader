@@ -2,10 +2,10 @@ import { pdfjs } from 'react-pdf';
 import { Document, Page } from 'react-pdf'
 import { Box, Button, Checkbox, CssBaseline, Grid } from '@mui/material'
 import { useEffect, useState } from 'react'
-import axios from 'axios'
 import Navbar from '../Navbar/Navbar'
 import jsPDF from 'jspdf'
 import Loading from '../Loading/Loading'
+import { getPdf } from '../../../services/pdfService';
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   'pdfjs-dist/build/pdf.worker.min.js',
@@ -22,9 +22,7 @@ const PdfViewer = () => {
   useEffect(() => {
     try {
       (async function () {
-        const response = await axios.get(`/getPdf`, {
-          responseType: 'blob',
-        });
+        const response = await getPdf()
         setPdfFile(new Blob([response.data]))
         const pdfUrl = URL.createObjectURL(new Blob([response.data]))
         setURl(pdfUrl)

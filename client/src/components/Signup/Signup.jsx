@@ -8,8 +8,8 @@ import { Avatar, Box, Container } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { validationSchema } from '../../utils/validation';
-import axios from 'axios'
 import { toast } from 'react-toastify';
+import { signup } from '../../../services/authService';
 
 
 const Signup = () => {
@@ -27,7 +27,7 @@ const Signup = () => {
         validationSchema: validationSchema,
         onSubmit: async (values) => {
             try {
-                const { data } = await axios.post('/signup', { ...values })
+                const { data } = await signup(values)
                 if (data.status) {
                     navigate('/login')
                     toast.success(data.message, {

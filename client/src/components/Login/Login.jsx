@@ -7,11 +7,11 @@ import Typography from '@mui/material/Typography';
 import { Avatar, Box, Container } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
-import axios from 'axios';
 import { loginValidationSchema } from '../../utils/validation';
 import { useDispatch } from 'react-redux';
 import { loginSuccess } from '../../../redux/slices/authSlice';
 import { toast } from 'react-toastify';
+import { login } from '../../../services/authService';
 
 
 const Login = () => {
@@ -26,7 +26,7 @@ const Login = () => {
         validationSchema: loginValidationSchema,
         onSubmit: async (values) => {
             try {
-                const { data } = await axios.post('/login', { ...values })
+                const { data } = await login(values)
                 dispatch(loginSuccess(data.user))
                 data.status ? navigate('/') : toast.error(data.message, {
                     position: "top-center"
