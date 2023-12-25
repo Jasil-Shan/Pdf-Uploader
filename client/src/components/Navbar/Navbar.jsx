@@ -156,7 +156,6 @@ function Navbar() {
                 horizontal: 'right',
               }}
               open={Boolean(anchorElUser)}
-              onClose={handleLogout}
             >
               <MenuItem onClick={handleLogout}>
                 <Typography textAlign="center">Logout</Typography>
