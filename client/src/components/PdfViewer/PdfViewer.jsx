@@ -6,6 +6,7 @@ import Navbar from '../Navbar/Navbar'
 import jsPDF from 'jspdf'
 import Loading from '../Loading/Loading'
 import { getPdf } from '../../../services/pdfService';
+import { useNavigate } from 'react-router-dom';
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   'pdfjs-dist/build/pdf.worker.min.js',
@@ -13,6 +14,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 ).toString();
 
 const PdfViewer = () => {
+  const navigate = useNavigate()
   const [numPages, setNumPages] = useState(null)
   const [pdfFile, setPdfFile] = useState(null)
   const [selectedPages, setSelectedPages] = useState([])
@@ -60,8 +62,8 @@ const PdfViewer = () => {
         newPdf.addPage();
       }
     }
-
     newPdf.save('new-pdf.pdf');
+    navigate('/')
   };
 
   if (showLoading || !pdfFile) {
