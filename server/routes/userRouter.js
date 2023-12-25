@@ -10,6 +10,7 @@ const router = express.Router()
 router.post('/signup', signup)
 router.post('/login', login)
 router.get('/auth', auth)
+router.get('/logout', )
 
 router.use(verifyUser)
 router.post('/uploadPdf',multerUpload,uploadPdf)

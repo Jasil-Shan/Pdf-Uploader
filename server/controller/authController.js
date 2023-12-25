@@ -65,3 +65,12 @@ export async function auth(req, res) {
         return res.status(401).json({ isAuthenticated: false, user: null });
     }
 }
+
+
+export async function logout(req, res) {
+    try {
+       return res.clearCookie('token');
+    } catch (error) {
+        console.error(error.message);
+    }
+}
