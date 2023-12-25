@@ -4,6 +4,8 @@ import 'dotenv/config.js'
 import cookieParser from "cookie-parser"
 import { dbConnect } from "./config/dbConfig.js"
 import userRouter from './routes/userRouter.js'
+import helmet from "helmet"
+import ExpressMongoSanitize from "express-mongo-sanitize"
 
 const app = express()
 
@@ -19,10 +21,12 @@ app.use(
         credentials: true,
     }))
 
-app.use(express.json({ limit: "150mb" }))
+app.use(ExpressMongoSanitize());
+app.use(express.json({ limit: '50mb' }))
 app.use(cookieParser())
-app.use(express.urlencoded({limit: '150mb', extended: true }))
+app.use(express.urlencoded({ limit: '150mb', extended: true }))
 
+app.use(helmet());
 app.use('/', userRouter)
 
 const { PORT } = process.env
