@@ -39,7 +39,7 @@ function Navbar() {
   const handleLogout = async () => {
 
     const result = await UserLogout()
-    
+
     dispatch(logout())
     navigate('/login', { replace: true })
     setAnchorElUser(null)
@@ -156,7 +156,7 @@ function Navbar() {
                 horizontal: 'right',
               }}
               open={Boolean(anchorElUser)}
-              onClose={handleSettings}
+              onClose={handleLogout}
             >
               <MenuItem onClick={handleLogout}>
                 <Typography textAlign="center">Logout</Typography>
