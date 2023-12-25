@@ -37,7 +37,6 @@ function Navbar() {
   };
 
   const handleLogout = async (e) => {
-    e.preventDefault()
 
     const result = await UserLogout()
 

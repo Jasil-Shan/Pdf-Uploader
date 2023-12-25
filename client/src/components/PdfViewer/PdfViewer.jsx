@@ -7,6 +7,7 @@ import jsPDF from 'jspdf'
 import Loading from '../Loading/Loading'
 import { getPdf } from '../../../services/pdfService';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   'pdfjs-dist/build/pdf.worker.min.js',
@@ -63,6 +64,9 @@ const PdfViewer = () => {
       }
     }
     newPdf.save('new-pdf.pdf');
+    toast.error('Downloaded Successfully', {
+      position: "top-center"
+  })
     navigate('/')
   };
 
