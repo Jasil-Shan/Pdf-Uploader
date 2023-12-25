@@ -14,5 +14,5 @@ export const signup = (values) => {
 
 
 export const UserLogout = () => {
-    return axios.get('/logout')
+    return axios.post('/logout')
 }

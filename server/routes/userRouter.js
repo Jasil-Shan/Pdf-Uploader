@@ -9,8 +9,8 @@ const router = express.Router()
 
 router.post('/signup', signup)
 router.post('/login', login)
+router.post('/logout',logout )
 router.get('/auth', auth)
-router.get('/logout',logout )
 
 router.use(verifyUser)
 router.post('/uploadPdf',multerUpload,uploadPdf)
