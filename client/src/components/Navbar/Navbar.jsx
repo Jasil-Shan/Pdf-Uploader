@@ -36,16 +36,15 @@ function Navbar() {
     setAnchorElNav(null);
   };
 
-  // const handleLogout = async (e) => {
+  const handleLogout = async (e) => {
+    e.preventDefault()
 
-  //   e.preventDefault()
+    const result = await UserLogout()
 
-  //   const result = await UserLogout()
-
-  //   dispatch(logout())
-  //   navigate('/login', { replace: true })
-  //   setAnchorElUser(null)
-  // };
+    dispatch(logout())
+    navigate('/login', { replace: true })
+    setAnchorElUser(null)
+  };
 
   return (
     <AppBar position="static" color='transparent' sx={{ margin: 0 }}>
@@ -144,6 +143,25 @@ function Navbar() {
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
+            <Menu
+              sx={{ mt: '45px' }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorElUser)}
+            >
+              <MenuItem onClick={handleLogout}>
+                <Typography textAlign="center">Logout</Typography>
+              </MenuItem>
+            </Menu>
           </Box>
         </Toolbar>
       </Container>
