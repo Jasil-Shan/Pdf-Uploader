@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 
+
 const VisuallyHiddenInput = styled('input')({
     clip: 'rect(0 0 0 0)',
     clipPath: 'inset(50%)',
@@ -89,11 +90,9 @@ const Home = () => {
                     flexDirection: 'column',
                     alignItems: 'center',
                     height: '100%',
-                    overflow: 'hidden',
-                    backgroundImage: 'src/assets/bg.svg',
-                }}
+                    backgroundImage: 'url(./assets/bg.svg)'}}
             >
-                <Typography mt={5} fontWeight={900} fontSize={36} maxWidth={600} textAlign={'center'} sx={{ opacity: 0.9 }}>
+                <Typography mt={5} fontWeight={900} fontSize={34} maxWidth={600} textAlign={'center'} sx={{ opacity: 0.9 }}>
                     The Smartest Way to Upload & Create new Pdf
                 </Typography>
                 <Card
@@ -102,16 +101,26 @@ const Home = () => {
                         margin: 2,
                         boxShadow: 3,
                         maxWidth: 680,
+                        display:'flex',
+                        flexDirection:'column',
+                        justifyContent:'center',
+                        alignItems:'center',
                         padding: 20,
                         textAlign: 'center',
                         cursor: 'pointer',
                         border: '2px dashed #ccc',
+                        '@media (max-width: 600px)': {
+                            maxWidth:300,
+                            maxHeight: 400,
+                            margin: '2% auto',
+                            overflow:'hidden'
+                          },
                     }}
                     onDragOver={handleDragOver}
                     onDrop={handleDrop}
                 >
                     <CloudUploadIcon sx={{ fontSize: 60, color: '#ccc', }} />
-                    <Typography variant="h6" sx={{ opacity: 0.7 }}>
+                    <Typography  variant="h6" sx={{ opacity: 0.7 , width:'100%' , display: { xs: 'none', md: 'block' }}}>
                         Drag & Drop or Click to Upload a PDF
                     </Typography>
                     <Button component="label" sx={{marginTop:2, opacity:.8}} variant="contained" startIcon={<CloudUploadIcon />}>

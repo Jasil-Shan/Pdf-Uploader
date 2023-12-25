@@ -49,16 +49,16 @@ const Login = () => {
                     overflow: 'hidden',
                 }}
             >
-                <Card sx={{ minWidth: 275, minHeight: 550, height: 'auto', width: '70%', boxShadow: 2 }}>
+                <Card sx={{ minWidth: 275, minHeight: 550, height: 'auto ', width: '70%', boxShadow: 2 }}>
                     <Grid container>
                         <Grid item xs={12} md={6}>
                             <Box
                                 sx={{
-                                    backgroundImage: 'url(https://via.placeholder.com/400x600)',
+                                    backgroundImage: 'url(https://res.cloudinary.com/dlhldjuis/image/upload/v1703486237/many_files_floating_in_the_beautiful_natural_background_dklnyl.png)',
                                     backgroundSize: 'cover',
                                     backgroundRepeat: 'no-repeat',
                                     backgroundPosition: 'center',
-                                    height: '100%',
+                                    height: '130%',
                                     width: '100%',
                                 }}
                             ></Box>
@@ -77,7 +77,7 @@ const Login = () => {
                                     <Typography component="h1" variant="h5">
                                         Login
                                     </Typography>
-                                    <Box component="form" onSubmit={formik.handleSubmit} sx={{ mt: 3 }}>
+                                    <Box component="form" onSubmit={formik.handleSubmit} sx={{ m: 2 }}>
                                         <Grid container spacing={5} >
                                             <Grid item xs={12}>
                                                 <TextField
@@ -113,13 +113,13 @@ const Login = () => {
                                             type="submit"
                                             fullWidth
                                             variant="contained"
-                                            sx={{ mt: 6, mb: 5 }}
+                                            sx={{ mt: 8, mb: 5 }}
                                         >
                                             Sign Up
                                         </Button>
                                         <Grid container justifyContent="flex-end">
                                             <Grid item>
-                                                <Link to={'/signup'} variant="body2">
+                                                <Link to={'/signup'} variant="body2" style={{ fontFamily: 'serif',color:'black' ,}}>
                                                     Still not registered? Sign up
                                                 </Link>
                                             </Grid>

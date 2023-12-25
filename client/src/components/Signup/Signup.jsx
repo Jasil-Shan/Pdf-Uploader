@@ -72,7 +72,7 @@ const Signup = () => {
                                     <Typography component="h1" variant="h5">
                                         Sign up
                                     </Typography>
-                                    <Box component="form" onSubmit={formik.handleSubmit} sx={{ mt: 3 }}>
+                                    <Box component="form" onSubmit={formik.handleSubmit} sx={{ m:2 }}>
                                         <Grid container spacing={3} >
                                             <Grid item xs={12} sm={6}>
                                                 <TextField
@@ -136,6 +136,7 @@ const Signup = () => {
                                                 <TextField
                                                     required
                                                     fullWidth
+                                                    size='small'
                                                     name="cPassword"
                                                     label="Confirm Password"
                                                     type="password"
@@ -157,8 +158,8 @@ const Signup = () => {
                                             Sign Up
                                         </Button>
                                         <Grid container justifyContent="flex-end">
-                                            <Grid item>
-                                                <Link to={'/login'} variant="body2">
+                                            <Grid item mt={1}>
+                                                <Link to={'/login'} variant="body2" style={{ fontFamily: 'serif',color:'black' ,}}>
                                                     Already have an account? Sign in
                                                 </Link>
                                             </Grid>
@@ -170,11 +171,11 @@ const Signup = () => {
                         <Grid item xs={12} md={6}>
                             <Box
                                 sx={{
-                                    backgroundImage: 'url(https://via.placeholder.com/400x600)',
+                                    backgroundImage: 'url(https://res.cloudinary.com/dlhldjuis/image/upload/v1703486889/many_files_floating_in_the_air_with_beautiful_natural_background_1_j5ehqc.png)',
                                     backgroundSize: 'cover',
                                     backgroundRepeat: 'no-repeat',
                                     backgroundPosition: 'center',
-                                    height: '100%',
+                                    height: '110%',
                                     width: '100%',
                                 }}
                             ></Box>
