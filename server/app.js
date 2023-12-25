@@ -15,8 +15,8 @@ dbConnect()
 app.use(
     cors({
         origin: [
-            'http://localhost:5000',
-            'https://pdf-zone.netlify.app',
+            "https://pdf-zone.netlify.app",
+            "http://localhost:5000",
         ],
         credentials: true,
     }))
