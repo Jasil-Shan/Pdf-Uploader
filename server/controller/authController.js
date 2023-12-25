@@ -39,7 +39,7 @@ export async function login(req, res) {
         const token = createToken(user._id)
         res.cookie("token", token, {
             withCredentials: true,
-            httpOnly: true
+            httpOnly: false
         })
         return res.status(200).json({ status: true, message: "Login Succes" })
     } catch (error) {
@@ -69,7 +69,8 @@ export async function auth(req, res) {
 
 export async function logout(req, res) {
     try {
-       return res.clearCookie('token');
+        res.clearCookie('token');
+        return res.json({success:true,message:'User Logged out'})
     } catch (error) {
         console.error(error.message);
     }
